@@ -13,16 +13,20 @@ namespace ProjectYu.Models
 
         public int CreatedbyUserID { get; set; }
 
-        public DateTime CreatedDateTime { get; set; }
+        public int? DeletedByUserID { get; set; }
 
-        public DateTime DeletedDateTime { get; set; }
+        public string CreatedDateTime { get; set; }
+
+        public string DeletedDateTime { get; set; }
 
         public int LikesCount { get; set; }
 
         public int DislikesCount { get; set; }
 
-        public int Rating { get; set; }
+        public double Rating { get; set; }
 
         public int CommentListID { get; set; }
+
+        public string FileName { get; set; }
     }
 }
