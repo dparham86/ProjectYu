@@ -15,9 +15,12 @@ namespace ProjectYu.Controllers
 
         public IActionResult Index()
         {
-            
-            NewVideosModel listOfVideos = NewVideos();
-            return View("Index",listOfVideos);
+            //UserModel acceptedUserModel = getAllUserData(UserModel.UserName);
+            NewVideosModel newVideosModel = NewVideos();
+
+            LoginedUserModel LoggedInUserModel = new LoginedUserModel { NewVideosModel = newVideosModel};
+            //NewVideosModel listOfVideos = NewVideos();
+            return View("Index", LoggedInUserModel);
         }
 
         public IActionResult About()

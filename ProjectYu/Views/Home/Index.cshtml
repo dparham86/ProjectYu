@@ -1,6 +1,6 @@
-﻿@model ProjectYu.Models.NewVideosModel
+﻿@model ProjectYu.Models.LoginedUserModel
 
-@{ 
+@{
     Layout = null;
 }
 
@@ -9,35 +9,35 @@
 <html>
 <head>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#loginButton").click(function () {
+                $("#myModal").modal();
+            });
+        });
+    </script>
+    <style>
+        .modal-header, h4, .close {
+            background-color: #5cb85c;
+            color: white !important;
+            text-align: center;
+            font-size: 30px;
+        }
+
+        .modal-footer {
+            background-color: #f9f9f9;
+        }
+    </style>
     <title>Project Yu Home Page</title>
 </head>
 
 <body>
-    <div><h1>Home Selection</h1></div>
-    <div align="center">
-        <table>
-            @for (int i = 0; i < Model.listofVideos.Count; i++)
-            {
-                <tr>
-                    <td>
-                        <video width="320" height="240" controls>
-                            <source src="C:\\Users\\dparh\\Desktop\\" + @Model.listofVideos.ElementAt(i).FileName type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                    </td>
-                    <td>
-                        @Model.listofVideos.ElementAt(i).VideoName
-                    </td>
-                </tr>
-            }
-        </table>
-    </div>
-
-            @*<video width='500' height='720' controls>
-                <source src='C:\\Users\\dparh\\Desktop\\Kikoushi_Enma_-_01.mp4' type='video/mp4'> 
-            <source src='C:\\Users\\dparh\\Desktop\\Kikoushi_Enma_-_01.ogg' type='video/ogg'> 
-                Your browser does not support the video tag.
-            </video>*@
+    <div><partial name="~/Views/Shared/HeaderPartialView.cshtml"/></div>
+    <div><partial name="~/Views/Home/HomePartialView.cshtml"/></div>
 
 </body>
 </html>

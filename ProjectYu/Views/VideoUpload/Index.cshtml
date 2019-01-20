@@ -1,0 +1,57 @@
+﻿@model ProjectYu.Models.LoginedUserModel
+
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        $(function () {
+            var s = jQuery("#fileid");
+            $("#submitButton").click(function () {
+                $.ajax({
+                    url: "/VideoUpload/SaveNewFile",
+                    type: "POST",
+                    data: function () {
+                        var data = new FormData();
+                        data.append("file", jQuery("#fileid").val());
+                        data.append("userId", jQuery("#userId").val());
+                        return data;
+                    }(),
+                    contentType: false,
+                    processData: false,
+                    success: function (response) {
+                        alert("video uploaded successfully");
+                    },
+                    error: function (jqXHR, textStatus, errorMessage) {
+                        console.log(errorMessage);
+                    }
+                });
+            });
+        });
+    </script>
+
+    <title>Index</title>
+</head>
+<body>
+    @*<div><partial name="~/Views/Shared/HeaderPartialView.cshtml" /></div>*@
+    @Html.HiddenFor(x => x.UserModel.UserId, new { @id = "userId"})
+    <p>Click the button to create a File Upload Button.</p>
+
+
+
+    <input id="fileid" type="file" name="file" />
+    <input id="submitButton" type="submit" value="FileName" />
+
+
+</body>
+</html>

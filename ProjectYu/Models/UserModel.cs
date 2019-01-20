@@ -40,7 +40,7 @@ namespace ProjectYu.Models
 
         //public MovieList listOfMovies { get; set; }
 
-        //public FavoritesList listOfFavorites { get; set; }
+        public FavoritesListModel listOfFavorites { get; set; }
 
         //public List<UserModel> listOfFriends { get; set; }
     }

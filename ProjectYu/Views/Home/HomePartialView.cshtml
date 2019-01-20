@@ -1,0 +1,28 @@
+﻿@model ProjectYu.Models.LoginedUserModel
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+
+<div><h1>Home</h1></div>
+<div align="center">
+    <h1 align="center">Newly Added Videos</h1>
+    <table>
+        <tr>
+            @for (int i = 0; i < Model.NewVideosModel.listofVideos.Count; i++)
+            {
+
+                <td>
+                    <video width="100" height="100" controls autoplay="autoplay">
+                        <source src='C:\\Users\\dparh\\Desktop\\@Model.NewVideosModel.listofVideos.ElementAt(i).FileName' type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </td>
+                <td>
+                    <a href="">@Model.NewVideosModel.listofVideos.ElementAt(i).VideoName</a>
+                </td>
+
+            }
+        </tr>
+    </table>
+</div>

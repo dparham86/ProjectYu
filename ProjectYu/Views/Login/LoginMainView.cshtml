@@ -1,0 +1,99 @@
+﻿@model ProjectYu.Models.LoginedUserModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Project Yu Home Page</title>
+</head>
+
+<body>
+    <div align="right">
+        @if (@Model.loggedIn == false)
+        {
+            <div align="right"><input type="submit" value="Sign In" /></div>
+        }
+        else
+        {
+            Html.HiddenFor(x => x.loggedIn);
+            Html.HiddenFor(x => x.UserModel.Birthday);
+            Html.HiddenFor(x => x.UserModel.BlockedUserListID);
+            Html.HiddenFor(x => x.UserModel.ChannelID);
+            Html.HiddenFor(x => x.UserModel.Email);
+            Html.HiddenFor(x => x.UserModel.FavoriteListID);
+            Html.HiddenFor(x => x.UserModel.HistoryListID);
+            Html.HiddenFor(x => x.UserModel.IsActive);
+            Html.HiddenFor(x => x.UserModel.LikedVideoListID);
+            Html.HiddenFor(x => x.UserModel.listOfFavorites);
+            Html.HiddenFor(x => x.UserModel.PassWord);
+            Html.HiddenFor(x => x.UserModel.SubscriberListID);
+            Html.HiddenFor(x => x.UserModel.UserId);
+            Html.HiddenFor(x => x.UserModel.UserName);
+            Html.HiddenFor(x => x.UserModel.WatchLaterListID);
+
+            <table style="width:90%">
+                <tr>
+                    <td align="left">
+                        <h3>Project Yu</h3>
+                    </td>
+                    <td align="center">
+                        <input type="text" placeholder="Search.." name="search"><button type="submit"><i class="fa fa-search"></i></button>
+                    </td>
+
+                    <td align="right">
+                        @Model.UserModel.UserName
+                        <ul style="list-style-type:none">
+                            <li><a asp-area="" asp-controller="MyChannel" asp-action="Index">My Channel</a></li>
+
+
+                            <li>
+                                <a asp-area="" asp-controller="Favorites" asp-action="Index">FavoritesList</a>
+                            </li>
+
+
+                            <li>
+                                <a asp-area="" asp-controller="Home" asp-action="Index">Watch Later List</a>
+                            </li>
+                            <li>
+                                <a asp-area="" asp-controller="Home" asp-action="Index">Settings</a>
+                            </li>
+
+                            <li><a asp-area="" asp-controller="Home" asp-action="Index">My Account</a></li>
+                            <li><a asp-area="" asp-controller="VideoUpload" asp-action="Index">Add Video</a></li>
+                        </ul>
+                </td>
+
+
+
+            </table>
+        }
+            <div align="center">
+                <h1 align="center">Newly Added Videos</h1>
+                <table>
+                    <tr>
+                        @for (int i = 0; i < Model.NewVideosModel.listofVideos.Count; i++)
+                        {
+
+                            <td>
+                                <video width="100" height="100" controls autoplay="autoplay">
+                                    <source src='C:\\Users\\dparh\\Desktop\\@Model.NewVideosModel.listofVideos.ElementAt(i).FileName' type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </td>
+                            <td>
+                                <a href="">@Model.NewVideosModel.listofVideos.ElementAt(i).VideoName</a>
+                            </td>
+
+                        }
+                    </tr>
+                </table>
+            </div>
+    </div>
+    </body>
+</html>
