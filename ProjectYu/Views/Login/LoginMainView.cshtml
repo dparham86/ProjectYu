@@ -10,6 +10,21 @@
 <head>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="~/Content/style.css" rel="stylesheet" type="text/css" />
+    <style>
+        .header {
+            background-color: navajowhite;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+    <script>
+        $("input#search-textbox").autocomplete({
+    source: ["c++", "java", "php", "coldfusion is on my ass", "javascript", "asp", "ruby"]
+});
+    </script>
     <title>Project Yu Home Page</title>
 </head>
 
@@ -27,7 +42,7 @@
             Html.HiddenFor(x => x.UserModel.ChannelID);
             Html.HiddenFor(x => x.UserModel.Email);
             Html.HiddenFor(x => x.UserModel.FavoriteListID);
-            Html.HiddenFor(x => x.UserModel.HistoryListID);
+                Html.HiddenFor(x => x.UserModel.HistoryListID);
             Html.HiddenFor(x => x.UserModel.IsActive);
             Html.HiddenFor(x => x.UserModel.LikedVideoListID);
             Html.HiddenFor(x => x.UserModel.listOfFavorites);
@@ -37,12 +52,13 @@
             Html.HiddenFor(x => x.UserModel.UserName);
             Html.HiddenFor(x => x.UserModel.WatchLaterListID);
 
-            <table style="width:90%">
+            <table style="width:100%">
                 <tr>
                     <td align="left">
                         <h3>Project Yu</h3>
                     </td>
                     <td align="center">
+                        <input id="search-textbox" type="text" maxlength="100" name="q" acceskey="b" autocomplete="off" placeholder="enter text" role="textbox" aria-autocomplete="list" aria-haspopup="true">
                         <input type="text" placeholder="Search.." name="search"><button type="submit"><i class="fa fa-search"></i></button>
                     </td>
 
@@ -76,24 +92,40 @@
             <div align="center">
                 <h1 align="center">Newly Added Videos</h1>
                 <table>
-                    <tr>
-                        @for (int i = 0; i < Model.NewVideosModel.listofVideos.Count; i++)
+
+                    @{
+                        int i = 0;
+
+                        @foreach (var video in Model.NewVideosModel.listofVideos)
                         {
+                            int cellBreaker = Model.NewVideosModel.listofVideos.Count;
 
-                            <td>
-                                <video width="100" height="100" controls autoplay="autoplay">
-                                    <source src='C:\\Users\\dparh\\Desktop\\@Model.NewVideosModel.listofVideos.ElementAt(i).FileName' type="video/mp4">
-                                    Your browser does not support the video tag.
-                                </video>
-                            </td>
-                            <td>
-                                <a href="">@Model.NewVideosModel.listofVideos.ElementAt(i).VideoName</a>
-                            </td>
+                            if (i % 4 == 0)
+                            {
 
+                                @:<tr>
+                                }
+
+                                <td>
+                                    <video width="300" height="300" controls="controls"  autoplay="autoplay">
+                                        <source src='~/Content/Videos/@video.FileName' type="video/mp4">
+                                       
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </td>
+                                <td>
+                                    <a href="">@video.VideoName</a>
+                                </td>
+
+                                if ((i % cellBreaker) == (cellBreaker - 1))
+                                {
+                                @:</tr>
+                            }
+                            i++;
                         }
-                    </tr>
+
+                    }
                 </table>
             </div>
-    </div>
     </body>
 </html>

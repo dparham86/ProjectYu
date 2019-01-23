@@ -1,0 +1,29 @@
+﻿@model ProjectYu.Models.VideoModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>@Model.VideoName</title>
+</head>
+<body>
+    @*<div class="header"><partial name="~/Views/Shared/HeaderPartialView.cshtml" /></div>*@
+  
+    <div align="center" style="width:90%">
+        <div><h2>@Model.VideoName</h2></div>
+        <table></table>
+        <video controls="controls" style="width:80%;">
+            <source src="~/Content/Videos/@Model.FileName" type="video/mp4" />
+        </video>
+        <h3>Created By - Elsy</h3>
+        <button id="subscribeButton" value="Subcribe" style="width:100px; height:40px;">Subscribe</button><br />
+        <label>Likes - @Model.LikesCount</label><br />
+        <label>Dislikes - @Model.DislikesCount</label><br />
+        <textarea>Insert Comments here</textarea>
+    </div>
+
+</body>
+</html>

@@ -11,14 +11,112 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+    <style>
+        .header {
+            background-color: navajowhite;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
     <script>
+        var source = [];
+        var chosenFile = "";
         $(document).ready(function () {
+
             $("#loginButton").click(function () {
                 $("#myModal").modal();
             });
+
+            $("a").click(function () {
+                $.ajax({
+                    url: "/VideoPlayer/Index",
+                    type: "POST",
+                    data: function () {
+                        var data = new FormData();
+                        data.append("fileName", $(this).val());
+
+                        return data;
+                    }(),
+                    success: function (response) {
+                        alert("it worked");
+                    },
+                    error: function (jqXHR, textStatus, errorMessage) {
+                        console.log(errorMessage);
+                    }
+                });
+            });
+
+            $.ajax({
+                url: "/Search/GetVideoNamesForAutoComplete",
+                type: "GET",
+                dataType: "json",
+                //data: function () {
+                //    var data = new FormData();
+                //    data.append("videoName", $(this).val());
+
+                //    return data;
+                //}(),
+                success: function (data) {
+                    var listofVideos = data;
+                    var objects;
+                    var sourceArray = [];
+
+                    var vidNames = [];
+                    for (var i = 0; i < data.listofVideos.length; i++) {
+                        vidNames.push(data.listofVideos[i].videoName);
+                    }
+
+                    console.log(listofVideos);
+                    jQuery('#autosearch').autocomplete({
+                        source: vidNames,
+                        select: function (event, ui) {
+                            chosenFile = ui.item.value;
+                            $.ajax({
+                                url: "/Search/Index",
+                                type: "POST",
+                                data: { videoName : chosenFile },
+                                success: function (response) {
+                                    alert("it worked");
+                                },
+                                error: function (jqXHR, textStatus, errorMessage) {
+                                    console.log(errorMessage);
+                                }
+                            });
+                        }
+                    });
+                },
+                error: function (jqXHR, textStatus, errorMessage) {
+                    console.log(errorMessage);
+                }
+            });
+
+
+
+            $('.ui-menu-item').click(function () {
+                $.ajax({
+                    url: "/Search/Index",
+                    type: "POST",
+                    data: function () {
+                        var data = new FormData();
+                        data.append("videoName", $(this).val());
+
+                        return data;
+                    }(),
+                    success: function (response) {
+                        alert("it worked");
+                    },
+                    error: function (jqXHR, textStatus, errorMessage) {
+                        console.log(errorMessage);
+                    }
+                });
+            });
         });
+
     </script>
     <style>
         .modal-header, h4, .close {
@@ -36,7 +134,7 @@
 </head>
 
 <body>
-    <div><partial name="~/Views/Shared/HeaderPartialView.cshtml"/></div>
+    <div class="header"><partial name="~/Views/Shared/HeaderPartialView.cshtml"/></div>
     <div><partial name="~/Views/Home/HomePartialView.cshtml"/></div>
 
 </body>

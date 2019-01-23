@@ -7,13 +7,13 @@
 
 @if (@Model.loggedIn == false)
 {
-    <table style="width:90%">
+    <table style="width:100%">
         <tr>
             <td align="left">
                 <h3>Project Yu</h3>
             </td>
-            <td align="center">
-                <input type="text" placeholder="Search.." name="search"><button type="submit"><i class="fa fa-search"></i></button>
+            <td align="center">              
+                <input type="text" placeholder="Search.." name="search" id="autosearch" style="overflow-y:auto;"><button type="submit"><i class="fa fa-search"></i></button>
             </td>
             <td align="right">
                 <input id="loginButton" type="button" value="Sign In" />

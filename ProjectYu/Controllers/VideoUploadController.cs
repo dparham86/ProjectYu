@@ -19,7 +19,7 @@ namespace ProjectYu.Controllers
             DataLayer dl = new DataLayer();
             LoginedUserModel UserModLoginedUserModel = new LoginedUserModel();
             UserModel userModel = new UserModel();
-            userModel.UserName = "admin";
+            userModel.UserName = "Elsy";
             UserModLoginedUserModel.UserModel = userModel;
             //UserModLoginedUserModel.UserModel.UserId = 1;
             UserModel acceptedUserModel = getAllUserData(UserModLoginedUserModel.UserModel.UserName);

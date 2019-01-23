@@ -18,6 +18,7 @@ namespace ProjectYu.Controllers
             UserModel userModel = new UserModel();
             UserModLoginedUserModel.UserModel = userModel;
             //UserModLoginedUserModel.UserModel.UserId = 1;
+            UserModLoginedUserModel.UserModel.UserName = "Elsy";
             UserModel acceptedUserModel = getAllUserData(UserModLoginedUserModel.UserModel.UserName);
             UserModLoginedUserModel.UserModel = acceptedUserModel;
             NewVideosModel newVideosModel = NewVideos();

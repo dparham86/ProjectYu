@@ -9,6 +9,109 @@ namespace ProjectYu
 {
     public class DataLayer
     {
+
+        public DataTable GetVideoNamesForAutoComplete()
+        {
+            string connetionString = null;
+            SqlConnection cnn;
+            connetionString = "Data Source=DESKTOP-9A0CTF1\\SQLEXPRESS;Initial Catalog=ProjectYu;Integrated Security=SSPI;";
+            DataTable dataTable = new DataTable();
+            cnn = new SqlConnection(connetionString);
+
+            cnn.Open();
+            try
+            {
+                //cnn.Open();
+                using (var command = new SqlCommand("SELECT VideoName FROM Video", cnn))
+                {
+                    //command.Parameters.AddWithValue("@fileName", fileName);
+                    SqlDataAdapter da = new SqlDataAdapter(command);
+                    // this will query your database and return the result to your datatable
+                    da.Fill(dataTable);
+                    //nn.Close();
+                    da.Dispose();
+
+                }
+
+                //MessageBox.Show("Connection Open ! ");
+                //cnn.Close();
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show("Can not open connection ! ");
+            }
+
+            return dataTable;
+        }
+
+        public DataTable GetVideoByFileName(string fileName)
+        {
+            string connetionString = null;
+            SqlConnection cnn;
+            connetionString = "Data Source=DESKTOP-9A0CTF1\\SQLEXPRESS;Initial Catalog=ProjectYu;Integrated Security=SSPI;";
+            DataTable dataTable = new DataTable();
+            cnn = new SqlConnection(connetionString);
+
+            cnn.Open();
+            try
+            {
+                //cnn.Open();
+                using (var command = new SqlCommand("SELECT * FROM Video WHERE FileName = @fileName", cnn))
+                {
+                    command.Parameters.AddWithValue("@fileName", fileName);
+                    SqlDataAdapter da = new SqlDataAdapter(command);
+                    // this will query your database and return the result to your datatable
+                    da.Fill(dataTable);
+                    //nn.Close();
+                    da.Dispose();
+
+                }
+
+                //MessageBox.Show("Connection Open ! ");
+                //cnn.Close();
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show("Can not open connection ! ");
+            }
+
+            return dataTable;
+        }
+
+        public DataTable GetVideosByFileNameContains(string VideoName)
+        {
+            string connetionString = null;
+            SqlConnection cnn;
+            connetionString = "Data Source=DESKTOP-9A0CTF1\\SQLEXPRESS;Initial Catalog=ProjectYu;Integrated Security=SSPI;";
+            DataTable dataTable = new DataTable();
+            cnn = new SqlConnection(connetionString);
+
+            cnn.Open();
+            try
+            {
+                //cnn.Open();
+                using (var command = new SqlCommand("SELECT * FROM Video WHERE FileName LIKE @VideoName", cnn))
+                {
+                    command.Parameters.AddWithValue("@VideoName", VideoName  + "%");
+                    SqlDataAdapter da = new SqlDataAdapter(command);
+                    // this will query your database and return the result to your datatable
+                    da.Fill(dataTable);
+                    //nn.Close();
+                    da.Dispose();
+
+                }
+
+                //MessageBox.Show("Connection Open ! ");
+                //cnn.Close();
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show("Can not open connection ! ");
+            }
+
+            return dataTable;
+        }
+
         public DataTable GetNewVideos()
         {
             string connetionString = null;
@@ -55,7 +158,7 @@ namespace ProjectYu
             try
             {
                 //cnn.Open();
-                using (var command = new SqlCommand("SELECT * FROM Video WHERE CreatedByUserID = 1", cnn))
+                using (var command = new SqlCommand("SELECT * FROM Video WHERE CreatedByUserID = 2", cnn))
                 {
                     //command.Parameters.AddWithValue("@userName", UserName);
                     SqlDataAdapter da = new SqlDataAdapter(command);
