@@ -1,20 +1,33 @@
 ﻿@model ProjectYu.Models.VideoModel
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <!DOCTYPE html>
 
 <html>
 <head>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="~/css/Style/Home/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <style>
+        .header {
+            background-color: white;
+        }
+
+        .ui-autocomplete-input {
+            height: 26px;
+            width: 50%;
+        }
+    </style>
     <title>@Model.VideoName</title>
 </head>
-<body>
-    @*<div class="header"><partial name="~/Views/Shared/HeaderPartialView.cshtml" /></div>*@
-  
-    <div align="center" style="width:90%">
+<body>  
+    <div align="center" style="border-top-style:groove">
         <div><h2>@Model.VideoName</h2></div>
-        <table></table>
         <video controls="controls" style="width:80%;">
             <source src="~/Content/Videos/@Model.FileName" type="video/mp4" />
         </video>

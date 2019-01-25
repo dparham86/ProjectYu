@@ -10,19 +10,23 @@ namespace ProjectYu.Controllers
 {
     public class LoginController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Index(LoginedUserModel Model)
         {
             //UserModel acceptedUserModel = getAllUserData(UserModel.UserName);
             //NewVideosModel newVideosModel = NewVideos();
 
-            LoginedUserModel LoggedInUserModel = new LoginedUserModel{};
-            UserModel UserModel = new UserModel();
-            return View("Index", LoggedInUserModel);
+            //LoginedUserModel LoggedInUserModel = new LoginedUserModel{};
+            //UserModel UserModel = new UserModel();
+            return View(Model);
         }
 
         [HttpPost]
-        public IActionResult Login(LoginedUserModel UserModLoginedUserModel)
+        public IActionResult Login(string userName, string passWord)
         {
+            LoginedUserModel UserModLoginedUserModel = new LoginedUserModel();
+            UserModel userModel2 = new UserModel();
+            UserModLoginedUserModel.UserModel = userModel2;
+            UserModLoginedUserModel.UserModel.UserName = userName;
             DataLayer dl = new DataLayer();
             UserModel acceptedUserModel = getAllUserData(UserModLoginedUserModel.UserModel.UserName);
             FavoritesListModel favoritesListModel = new FavoritesListModel();

@@ -1,26 +1,60 @@
 ﻿@model ProjectYu.Models.LoginedUserModel
-@{
-    Layout = null;
-}
 
-
-
-@if (@Model.loggedIn == false)
+@if (Model.loggedIn == false)
 {
     <table style="width:100%">
         <tr>
             <td align="left">
-                <h3>Project Yu</h3>
+                <div align="center">
+                    <i class="fa fa-bars" style="font-size:36px;"></i>
+                </div>
             </td>
-            <td align="center">              
+            <td align="center">
                 <input type="text" placeholder="Search.." name="search" id="autosearch" style="overflow-y:auto;"><button type="submit"><i class="fa fa-search"></i></button>
             </td>
             <td align="right">
-                <input id="loginButton" type="button" value="Sign In" />
+                <div align="center"><input id="loginButton" type="button" value="Sign In" /></div>
             </td>
         </tr>
     </table>
-    @using (Html.BeginForm("Login", "Login"))
+}
+else
+{
+    <table style="width:100%">
+        <tr>
+            <td align="left">
+                <div align="center">
+                    <i class="fa fa-bars" style="font-size:36px;"></i>
+                </div>
+            </td>
+            <td align="center">
+                <input type="text" placeholder="Search.." name="search" id="autosearch" style="overflow-y:auto;"><button type="submit"><i class="fa fa-search"></i></button>
+            </td>
+            <td align="right">
+                <ul style="list-style-type:none">
+                    <li><a asp-area="" asp-controller="Home" asp-action="Index">My Channel</a></li>
+
+
+                    <li>
+                        <a asp-area="" asp-controller="Favorites" asp-action="Index">FavoritesList</a>
+                    </li>
+                    <li>
+                        <a asp-area="" asp-controller="Home" asp-action="Index">Watch Later List</a>
+                    </li>
+                    <li>
+                        <a asp-area="" asp-controller="Home" asp-action="Index">Settings</a>
+                    </li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Index">My Account</a></li>
+                    <li><a asp-area="" asp-controller="VideoUpload" asp-action="Index">Add Video</a></li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+}
+
+
+
+@*@using (Html.BeginForm("Login", "Login"))
     {
         <div class="container">
             <!-- Modal -->
@@ -37,11 +71,11 @@
                             <form role="form">
                                 <div class="form-group">
                                     <label for="usrname"><span class="glyphicon glyphicon-user"></span> Username</label>
-                                    @Html.TextBoxFor(x => x.UserModel.UserName)
+                                    Html.TextBoxFor(x => x.UserModel.UserName)
                                 </div>
                                 <div class="form-group">
                                     <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
-                                    @Html.PasswordFor(x => x.UserModel.PassWord)
+                                    Html.PasswordFor(x => x.UserModel.PassWord)
 
                                 </div>
                                 <div class="checkbox">
@@ -60,46 +94,46 @@
                 </div>
             </div>
         </div>
-    }
-}
-else
-{
-    <table style="width:90%">
-        <tr>
-            <td align="left">
-                <h3>Project Yu</h3>
-            </td>
-            <td align="center">
-                <input type="text" placeholder="Search.." name="search"><button type="submit"><i class="fa fa-search"></i></button>
-            </td>
-            <td align="right">
-                @Model.UserModel.UserName
-                <ul style="list-style-type:none">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">My Channel</a></li>
+    }*@
+
+@*else
+    {
+        <table style="width:90%">
+            <tr>
+                <td align="left">
+                    <h3>Project Yu</h3>
+                </td>
+                <td align="center">
+                    <input type="text" placeholder="Search.." name="search"><button type="submit"><i class="fa fa-search"></i></button>
+                </td>
+                <td align="right">
+                    @Model.UserModel.UserName
+                    <ul style="list-style-type:none">
+                        <li><a asp-area="" asp-controller="Home" asp-action="Index">My Channel</a></li>
 
 
-                    <li>
-                        <a asp-area="" asp-controller="Favorites" asp-action="Index">FavoritesList</a>
-                    </li>
+                        <li>
+                            <a asp-area="" asp-controller="Favorites" asp-action="Index">FavoritesList</a>
+                        </li>
 
 
-                    <li>
-                        <a asp-area="" asp-controller="Home" asp-action="Index">Watch Later List</a>
-                    </li>
-                    <li>
-                        <a asp-area="" asp-controller="Home" asp-action="Index">Settings</a>
-                    </li>
+                        <li>
+                            <a asp-area="" asp-controller="Home" asp-action="Index">Watch Later List</a>
+                        </li>
+                        <li>
+                            <a asp-area="" asp-controller="Home" asp-action="Index">Settings</a>
+                        </li>
 
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">My Account</a></li>
-                    <li><a asp-area="" asp-controller="VideoUpload" asp-action="Index">Add Video</a></li>
-                </ul>
-            </td>
-
-
+                        <li><a asp-area="" asp-controller="Home" asp-action="Index">My Account</a></li>
+                        <li><a asp-area="" asp-controller="VideoUpload" asp-action="Index">Add Video</a></li>
+                    </ul>
+                </td>
 
 
 
-    </table>
 
 
-}
+        </table>
+
+
+    }*@

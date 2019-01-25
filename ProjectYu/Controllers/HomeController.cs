@@ -19,8 +19,15 @@ namespace ProjectYu.Controllers
             NewVideosModel newVideosModel = NewVideos();
 
             LoginedUserModel LoggedInUserModel = new LoginedUserModel { NewVideosModel = newVideosModel};
-            //NewVideosModel listOfVideos = NewVideos();
-            return View("Index", LoggedInUserModel);
+            LoggedInUserModel.loggedIn = false;
+            NewVideosModel listOfVideos = NewVideos();
+            return View(LoggedInUserModel);
+        }
+
+        public IActionResult IndexWithModel(LoginedUserModel model)
+        {
+
+            return View("Login", model);
         }
 
         public IActionResult About()

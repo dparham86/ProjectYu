@@ -1,25 +1,18 @@
-﻿@model List<ProjectYu.Models.NewVideosModel>
+﻿@model ProjectYu.Models.NewVideosModel
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <title>Video Search</title>
-</head>
-<body>
-    <div align="center">
+    <div align="center" style="border-top-style:groove">
         <h1 align="center">Searched Video(s)</h1>
         <table>
 
             @{
                 int i = 0;
 
-                @foreach (var video in Model)
+                @foreach (var video in Model.listofVideos)
                 {
-                    int cellBreaker = Model.Count;
+                    int cellBreaker = Model.listofVideos.Count;
 
                     if (i % 4 == 0)
                     {
@@ -29,13 +22,13 @@
 
                         <td>
                             <video width="300" height="300" controls="controls" autoplay="autoplay">
-                                <source src='' type="video/mp4">
+                                <source src='~/Content/Videos/@video.FileName' type="video/mp4">
 
                                 Your browser does not support the video tag.
                             </video>
                         </td>
                         <td>
-                            <a href=""></a>
+                            <a href="">@video.VideoName</a>
                         </td>
 
                         if ((i % cellBreaker) == (cellBreaker - 1))
@@ -48,5 +41,3 @@
             }
         </table>
     </div>
-</body>
-</html>

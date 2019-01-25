@@ -1,20 +1,20 @@
-﻿@model ProjectYu.Models.LoginedUserModel
+﻿@model ProjectYu.Models.NewVideosModel
 @*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
 
 
-<div><h1>Home</h1></div>
-<div align="center">
-    <h1 align="center">Newly Added Videos</h1>
-    <table style="width:80%; border: 1px solid black;">
+
+<div align="center" style="border-top-style:groove">
+    <h3 align="center">Newly Added Videos</h3>
+    <table style="width:300px; height:100%; border: 3px solid white;">
 
         @{ 
             int i = 0;
        
-        @foreach (var video in Model.NewVideosModel.listofVideos)
+        @foreach (var video in Model.listofVideos)
         {
-            int cellBreaker = Model.NewVideosModel.listofVideos.Count;
+            int cellBreaker = Model.listofVideos.Count;
 
             if (i % 4 == 0)
             {
@@ -22,12 +22,12 @@
                 @:<tr>
 }
 
-<td>
-    <video width="300" height="300" controls="controls" autoplay="autoplay">
+<th>
+    <video width="150" height="150" controls="controls" autoplay="autoplay">
         <source src='~/Content/Videos/@video.FileName' type="video/mp4">
         Your browser does not support the video tag.
     </video>
-</td>
+</th>
 <td>
 
     <a asp-controller="VideoPlayer" asp-action="Index" asp-route-fileName="@video.FileName">@video.FileName</a>

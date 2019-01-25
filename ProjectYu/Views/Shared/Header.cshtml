@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewData["Title"] = "Header";
+    Layout = "Header";
+
+}
+
+<table style="width:100%">
+    <tr>
+        <td align="left">
+            <div align="center">
+                <i class="fa fa-bars" style="font-size:36px;"></i>
+            </div>
+        </td>
+        <td align="center">
+            <input type="text" placeholder="Search.." name="search" id="autosearch" style="overflow-y:auto;"><button type="submit"><i class="fa fa-search"></i></button>
+        </td>
+        <td align="right">
+            <div align="center"><input id="loginButton" type="button" value="Sign In" /></div>
+        </td>
+    </tr>
+</table>
+
+<div id="content">
+    @RenderBody()
+</div>
+
+<div id="Footer">
+    <p>This is Footer</p>
+</div>
+
+
+

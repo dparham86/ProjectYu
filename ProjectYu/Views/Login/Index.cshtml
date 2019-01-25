@@ -1,94 +1,83 @@
 ﻿@model ProjectYu.Models.LoginedUserModel
-@{
-    ViewData["Title"] = "Login";
-}
 
 @{
-
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<!doctype html>
 
-<!DOCTYPE html>
-<html>
 <head>
-    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("#menu li").hover(function () {
-                $(".dropdown-menu", this).slideDown(100);
-            }, function () {
-                $(".dropdown-menu", this).stop().slideUp(100);
+
+    <!-- Basics -->
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>Login</title>
+
+    <!-- CSS -->
+    <link href="~/css/Login/Login.css" rel="stylesheet" />
+    <link href="~/css/Style/Home/style.css" rel="stylesheet" />
+
+    <script>
+        $("#loginButton").click(function () {
+
+
+            $.ajax({
+                url: "/Login/Login",
+                type: "POST",
+                data: function () {
+                    var data = new FormData();
+                    data.append("userName", $('#username').val());
+
+                    return data;
+                }(),
+                success: function (response) {
+                    // window.location.href = '/Home/Login?userName=' $("#username").val();
+                },
+                error: function (jqXHR, textStatus, errorMessage) {
+                    console.log(errorMessage);
+                }
             });
-        })
+
+        });
     </script>
-    <style>
-        #menu a {
-            text-decoration: none;
-            color: #333;
-            font-family: sans-serif;
-            padding: 5px;
-        }
 
-        #menu ul li {
-            display: inline;
-        }
-
-        .dropdown-menu {
-            display: none;
-        }
-    </style>
-    <title>Login Page</title>
 </head>
 
+<!-- Main HTML -->
+<html>
 <body>
-    @*<div id="menu">
-            <ul>
-                <li><a href="#">Link One</a></li>
-                <li>
-                    <a href="#">Link Two</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Dropdown Link</a></li>
-                        <li><a href="#">Another Dropdown Link</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>*@
-    @*<video width="400" controls>
-            <source src="C:\Users\dparh\Desktop\Higurashi_no_Nakukoroni_01.mp4"  type="video/mp4;codecs="avc1.42E01E, mp4a.40.2">
 
-            Your browser does not support HTML5 video.
-        </video>*@
+    <!-- Begin Page Content -->
 
-    <div align="center">
-        <img src="~/images/login_stock_photo.jpg" />
-    </div>
-    <form asp-action="Login" asp-controller="Login" method="post">
-        <div align="center">
-            <p>
-                UserName:
-            </p>
-            @Html.TextBoxFor(m => m.UserModel.UserName, new { autocomplete = "off" })
-            @if (Model.UserModel != null)
-            {
-                if (Model.UserModel.IsActive == "N")
-                {
-                    <br /><font color="red">Invalid Login Information.</font>
-                }
-
-            }
-            <br />
-            <p>
-                Password:
-            </p>
-            @Html.PasswordFor(m => m.UserModel.PassWord)<br /><br />
+    <div id="container">
 
 
-            @Html.ActionLink("Create Account", "SignUp", "Home")
-            <br /><br />
-            <div><input type="button" id="cancelButton" name="cancelButton" value="Cancel" /> &nbsp;&nbsp; &nbsp; &nbsp;  <input type="submit" id="submit" name="submit" value="Login" /> </div>
-        </div>
-    </form>
-    </div>
+        @using (Html.BeginForm("Login", "Login", FormMethod.Post))
+        {
+            <label for="username">Username:</label>
+
+            @*<input type="text" id="username" name="userName">*@
+            @Html.TextBoxFor(x => x.UserModel.UserName, new { @id = "userName" })
+            <label for="password">Password:</label>
+
+            <p><a href="#">Forgot your password?</a></p>
+
+            @*<input type="password" id="passWord" name="password">*@
+            @Html.TextBoxFor(x => x.UserModel.PassWord)
+            <div id="lower">
+
+                <input type="checkbox"><label class="check" for="checkbox">Keep me logged in</label>
+
+                <input id="loginButton" type="submit" value="Login">
+
+            </div><!--/ lower-->
+
+
+        }
+    </div><!--/ container-->
+    <!-- End Page Content -->
+
 </body>
 
 </html>

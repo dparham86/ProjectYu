@@ -33,7 +33,7 @@ namespace ProjectYu.Controllers
                 videoModel.FileName = dt.Rows[i]["FileName"].ToString();
                 listOfVideoModels.listofVideos.Add(videoModel);
             }
-            return View("Index", listOfVideoModels);
+            return View("Index",listOfVideoModels);
         }
 
         [HttpGet]
