@@ -24,6 +24,11 @@ namespace ProjectYu.Controllers
             NewVideosModel newVideosModel = NewVideos();
             UserModLoginedUserModel.NewVideosModel = new NewVideosModel();
             UserModLoginedUserModel.NewVideosModel = newVideosModel;
+            FavoritesListModel favList = new FavoritesListModel();
+            UserModLoginedUserModel.UserModel.listOfFavorites = favList;
+            List<VideoModel> videoModel = new List<VideoModel>();
+            UserModLoginedUserModel.UserModel.listOfFavorites.listOfMVideoModels = videoModel;
+            UserModLoginedUserModel.loggedIn = true;
             return View("Index", UserModLoginedUserModel);
         }
 

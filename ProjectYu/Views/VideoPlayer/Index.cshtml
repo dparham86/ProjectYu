@@ -1,4 +1,4 @@
-﻿@model ProjectYu.Models.VideoModel
+﻿@model ProjectYu.Models.LoginedUserModel
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -23,20 +23,35 @@
             width: 50%;
         }
     </style>
-    <title>@Model.VideoName</title>
-</head>
-<body>  
-    <div align="center" style="border-top-style:groove">
-        <div><h2>@Model.VideoName</h2></div>
-        <video controls="controls" style="width:80%;">
-            <source src="~/Content/Videos/@Model.FileName" type="video/mp4" />
-        </video>
-        <h3>Created By - Elsy</h3>
-        <button id="subscribeButton" value="Subcribe" style="width:100px; height:40px;">Subscribe</button><br />
-        <label>Likes - @Model.LikesCount</label><br />
-        <label>Dislikes - @Model.DislikesCount</label><br />
-        <textarea>Insert Comments here</textarea>
-    </div>
+
+    @for (var i = 0; i < Model.NewVideosModel.listofVideos.Count; i++)
+    {
+        if (@Model.NewVideosModel.listofVideos[i].isSelected)
+        {
+            <title>@Model.NewVideosModel.listofVideos[i].VideoName</title>
+        }
+    }
+        </head>
+<body>
+    @for (var i = 0; i < @Model.NewVideosModel.listofVideos.Count; i++)
+    {
+        if (@Model.NewVideosModel.listofVideos[i].isSelected)
+        {
+            <div align="center" style="border-top-style:groove">
+                <div><h2>@Model.NewVideosModel.listofVideos[i].VideoName</h2></div>
+                <video controls="controls" style="width:80%;">
+                    <source src="~/Content/Videos/@Model.NewVideosModel.listofVideos[i].FileName" type="video/mp4" />
+                </video>
+                <h3>Created By - Elsy</h3>
+                <button id="subscribeButton" value="Subcribe" style="width:100px; height:40px;">Subscribe</button><br />
+                <label>Likes - @Model.NewVideosModel.listofVideos[i].LikesCount</label><br />
+                <label>Dislikes - @Model.NewVideosModel.listofVideos[i].DislikesCount</label><br />
+                <textarea>Insert Comments here</textarea>
+            </div>
+        }
+
+    }
+
 
 </body>
-</html>
+    </html>

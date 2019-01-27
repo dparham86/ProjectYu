@@ -4,4 +4,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="header"><partial name="~/Views/Home/HomePartialView.cshtml" model="@Model.NewVideosModel"/></div>
+<body>
+    <div class="header"><partial name="~/Views/Home/HomePartialView.cshtml" model="@Model" /></div>
+
+
+   
+    @*<div class="header" style="display:none;"><partial name="~/Shared/VideoPlayerPartialView.cshtml" model="@Model.NewVideosModel" /></div>*@
+</body>

@@ -1,8 +1,9 @@
 ﻿@model ProjectYu.Models.LoginedUserModel
 
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 
 <!DOCTYPE html>
 
@@ -15,82 +16,73 @@
 
 <body>
     <div align="right">
-        @if (@Model.loggedIn == false)
-        {
-            <div align="right"><input type="submit" value="Sign In" /></div>
-        }
-        else
-        {
-            Html.HiddenFor(x => x.loggedIn);
-            Html.HiddenFor(x => x.UserModel.Birthday);
-            Html.HiddenFor(x => x.UserModel.BlockedUserListID);
-            Html.HiddenFor(x => x.UserModel.ChannelID);
-            Html.HiddenFor(x => x.UserModel.Email);
-            Html.HiddenFor(x => x.UserModel.FavoriteListID);
-            Html.HiddenFor(x => x.UserModel.HistoryListID);
-            Html.HiddenFor(x => x.UserModel.IsActive);
-            Html.HiddenFor(x => x.UserModel.LikedVideoListID);
-            Html.HiddenFor(x => x.UserModel.listOfFavorites);
-            Html.HiddenFor(x => x.UserModel.PassWord);
-            Html.HiddenFor(x => x.UserModel.SubscriberListID);
-            Html.HiddenFor(x => x.UserModel.UserId);
-            Html.HiddenFor(x => x.UserModel.UserName);
-            Html.HiddenFor(x => x.UserModel.WatchLaterListID);
-
-            <table style="width:90%">
-                <tr>
-                    <td align="left">
-                        <h3>Project Yu</h3>
-                    </td>
-                    <td align="center">
-                        <input type="text" placeholder="Search.." name="search"><button type="submit"><i class="fa fa-search"></i></button>
-                    </td>
-
-                    <td align="right">
-                        <ul style="list-style-type:none">
-                            <li><a asp-area="" asp-controller="Home" asp-action="Index">My Channel</a></li>
-
-
-                            <li>
-                                <a asp-area="" asp-controller="Favorites" asp-action="Index">FavoritesList</a>
-                            </li>
-
-
-                            <li>
-                                <a asp-area="" asp-controller="Home" asp-action="Index">Watch Later List</a>
-                            </li>
-                            <li>
-                                <a asp-area="" asp-controller="Home" asp-action="Index">Settings</a>
-                            </li>
-
-                            <li><a asp-area="" asp-controller="Home" asp-action="Index">My Account</a></li>
-                            <li><a asp-area="" asp-controller="VideoUpload" asp-action="Index">Add Video</a></li>
-                        </ul>
-                    </td>
-
-
-
-            </table>
-        }
-        <div align="center">
+        <div align="center" style="border-top-style:groove">
             <h1 align="center">@Model.UserModel.UserName Videos</h1>
             <table>
                 <tr>
                     @for (int i = 0; i < Model.NewVideosModel.listofVideos.Count; i++)
                     {
+                        @using (Html.BeginForm("Index", "VideoPlayer"))
+                        {
+                            @Html.HiddenFor(x => x.loggedIn)
+                            @Html.HiddenFor(x => x.UserModel.Birthday)
+                            @Html.HiddenFor(x => x.UserModel.BlockedUserListID)
+                            @Html.HiddenFor(x => x.UserModel.ChannelID)
+                            @Html.HiddenFor(x => x.UserModel.Email)
+                            @Html.HiddenFor(x => x.UserModel.FavoriteListID)
+                            @Html.HiddenFor(x => x.UserModel.HistoryListID)
+                            @Html.HiddenFor(x => x.UserModel.IsActive)
+                            @Html.HiddenFor(x => x.UserModel.LikedVideoListID)
+                            @Html.HiddenFor(x => x.UserModel.listOfFavorites)
+                            @Html.HiddenFor(x => x.UserModel.listOfFavorites.FavoritesListID)
+                            @Html.HiddenFor(x => x.UserModel.PassWord)
+                            @Html.HiddenFor(x => x.UserModel.SubscriberListID)
+                            @Html.HiddenFor(x => x.UserModel.UserId)
+                            @Html.HiddenFor(x => x.UserModel.UserName)
+                            @Html.HiddenFor(x => x.UserModel.WatchLaterListID)
 
-                        <td>
-                            <video width="100" height="100" controls autoplay="autoplay">
-                                <source src='C:\\Users\\dparh\\Desktop\\@Model.NewVideosModel.listofVideos.ElementAt(i).FileName' type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
-                        </td>
-                        <td>
-                            <a href="">@Model.NewVideosModel.listofVideos.ElementAt(i).VideoName</a>
-                        </td>
+                            for (int j = 0; j < Model.NewVideosModel.listofVideos.Count; j++)
+                            {
+                                @Html.HiddenFor(x => x.NewVideosModel.listofVideos[j].CommentListID)
+                                @Html.HiddenFor(x => x.NewVideosModel.listofVideos[j].CreatedbyUserID)
+                                @Html.HiddenFor(x => x.NewVideosModel.listofVideos[j].CreatedDateTime)
+                                @Html.HiddenFor(x => x.NewVideosModel.listofVideos[j].DeletedByUserID)
+                                @Html.HiddenFor(x => x.NewVideosModel.listofVideos[j].DeletedDateTime)
+                                @Html.HiddenFor(x => x.NewVideosModel.listofVideos[j].DislikesCount)
+                                @Html.HiddenFor(x => x.NewVideosModel.listofVideos[j].FileName)
+                                @Html.HiddenFor(x => x.NewVideosModel.listofVideos[j].LikesCount)
+                                @Html.HiddenFor(x => x.NewVideosModel.listofVideos[j].Rating)
+                                @Html.HiddenFor(x => x.NewVideosModel.listofVideos[j].VideoID)
+                                @Html.HiddenFor(x => x.NewVideosModel.listofVideos[j].VideoName)
+                            }
 
-                    }
-                </tr>
+                            for (int j = 0; j < Model.UserModel.listOfFavorites.listOfMVideoModels.Count; j++)
+                            {
+                                @Html.HiddenFor(x => x.UserModel.listOfFavorites.listOfMVideoModels[j].CommentListID)
+                                @Html.HiddenFor(x => x.UserModel.listOfFavorites.listOfMVideoModels[j].CreatedbyUserID)
+                                @Html.HiddenFor(x => x.UserModel.listOfFavorites.listOfMVideoModels[j].CreatedDateTime)
+                                @Html.HiddenFor(x => x.UserModel.listOfFavorites.listOfMVideoModels[j].DeletedByUserID)
+                                @Html.HiddenFor(x => x.UserModel.listOfFavorites.listOfMVideoModels[j].DeletedDateTime)
+                                @Html.HiddenFor(x => x.UserModel.listOfFavorites.listOfMVideoModels[j].DislikesCount)
+                                @Html.HiddenFor(x => x.UserModel.listOfFavorites.listOfMVideoModels[j].FileName)
+                                @Html.HiddenFor(x => x.UserModel.listOfFavorites.listOfMVideoModels[j].LikesCount)
+                                @Html.HiddenFor(x => x.UserModel.listOfFavorites.listOfMVideoModels[j].Rating)
+                                @Html.HiddenFor(x => x.UserModel.listOfFavorites.listOfMVideoModels[j].VideoID)
+                            }
+
+                            @Html.Hidden("linkId", i)
+                            <td>
+                                <video width="100" height="100" controls autoplay="autoplay">
+                                    <source src='C:\\Users\\dparh\\Desktop\\@Model.NewVideosModel.listofVideos.ElementAt(i).FileName' type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </td>
+                            <td>
+                                <button id="submitButton" value="click">@Model.NewVideosModel.listofVideos[i].FileName</button>
+                            </td>
+                            }
+                        }
+                    </tr>
             </table>
         </div>
     </div>

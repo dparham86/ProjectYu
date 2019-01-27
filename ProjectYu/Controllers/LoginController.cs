@@ -10,14 +10,16 @@ namespace ProjectYu.Controllers
 {
     public class LoginController : Controller
     {
-        public IActionResult Index(LoginedUserModel Model)
+        public IActionResult Index(LoginedUserModel LoginedUserModel)
         {
+            List<VideoModel> videoModel = new List<VideoModel>();
+            LoginedUserModel.UserModel.listOfFavorites.listOfMVideoModels = videoModel;
             //UserModel acceptedUserModel = getAllUserData(UserModel.UserName);
             //NewVideosModel newVideosModel = NewVideos();
 
             //LoginedUserModel LoggedInUserModel = new LoginedUserModel{};
             //UserModel UserModel = new UserModel();
-            return View(Model);
+            return View(LoginedUserModel);
         }
 
         [HttpPost]
@@ -40,8 +42,10 @@ namespace ProjectYu.Controllers
                 LoggedInUserModel.loggedIn = true;
                 favoritesListModel = GetFavoritesList(LoggedInUserModel.UserModel.FavoriteListID);
                 LoggedInUserModel.UserModel.listOfFavorites = favoritesListModel;
-                RedirectToAction("Index", "Home", LoggedInUserModel);
+                //RedirectToAction("IndexWithModel", "Home", LoggedInUserModel);
+                
                 return View("LoginMainView", LoggedInUserModel);
+                
 
             }
             else

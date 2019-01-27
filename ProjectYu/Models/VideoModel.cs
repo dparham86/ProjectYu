@@ -28,5 +28,7 @@ namespace ProjectYu.Models
         public int CommentListID { get; set; }
 
         public string FileName { get; set; }
+
+        public bool isSelected { get; set; }
     }
 }

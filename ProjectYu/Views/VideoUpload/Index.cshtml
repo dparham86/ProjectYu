@@ -1,7 +1,7 @@
 ﻿@model ProjectYu.Models.LoginedUserModel
 
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
@@ -31,6 +31,7 @@
                     processData: false,
                     success: function (response) {
                         alert("video uploaded successfully");
+                        window.location.href = '/Home/IndexWithUserId?username=' + $("#userId").val;
                     },
                     error: function (jqXHR, textStatus, errorMessage) {
                         console.log(errorMessage);
@@ -43,15 +44,18 @@
     <title>Index</title>
 </head>
 <body>
-    @*<div><partial name="~/Views/Shared/HeaderPartialView.cshtml" /></div>*@
-    @Html.HiddenFor(x => x.UserModel.UserId, new { @id = "userId"})
-    <p>Click the button to create a File Upload Button.</p>
+    <div align="center" style="border-top-style:groove">
+
+
+        @*<div><partial name="~/Views/Shared/HeaderPartialView.cshtml" /></div>*@
+        @Html.HiddenFor(x => x.UserModel.UserId, new { @id = "userId" })
+        <p>Click the button to create a File Upload Button.</p>
 
 
 
-    <input id="fileid" type="file" name="file" />
-    <input id="submitButton" type="submit" value="FileName" />
-
+        <input id="fileid" type="file" name="file" />
+        <input id="submitButton" type="submit" value="FileName" />
+    </div>
 
 </body>
 </html>

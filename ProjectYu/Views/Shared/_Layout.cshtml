@@ -9,14 +9,40 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
     <script>
         var source = [];
         var chosenFile = "";
         $(document).ready(function () {
 
-            $("#loginButton").click(function () {
-                window.location.href = '/Login/Index?Model=' + @Model;
-            });
+            @*$("#loginButton").click(function () {
+                var LoginedUserModel = new Object();
+                var listOfVideos = new Object();
+                var i;
+   
+
+      
+
+
+                LoginedUserModel.loggedIn = @Model.loggedIn.ToString().ToLower();
+                LoginedUserModel.NewVideosModel = @Model.NewVideosModel;
+                LoginedUserModel.NewVideosModel.listofVideos = listOfVideos;
+                LoginedUserModel.UserModel = @Model.UserModel
+                window.location.href = '/Login/Index?LoginedUserModel=' + LoginedUserModel;
+;
+                //$.ajax({
+                //    url: "/Login/Index",
+                //    type: "POST",
+                //    data: { LoginedUserModel: LoginedUserModel },
+                //    success: function (response) {
+
+                //    },
+                //    error: function (jqXHR, textStatus, errorMessage) {
+                //        console.log(errorMessage);
+                //    }
+                //});
+                //window.location.href = '/Login/Index?Model=' + @Model;
+            });*@
 
             $("a").click(function () {
                 $.ajax({
@@ -96,6 +122,16 @@
 
     </script>
     <style>
+        button {
+            background: none !important;
+            border: none;
+            padding: 0 !important;
+            /*optional*/
+            font - family: arial, sans - serif; /*input has OS specific font-family*/
+            color: #069;
+            text - decoration: underline;
+            cursor: pointer;
+        }
         .modal-header, h4, .close {
             background-color: #5cb85c;
             color: white !important;
@@ -119,47 +155,6 @@
     <div id="Footer" align="center" style="border-top-style:groove;">
         <p>Project Yu - 2019</p>
     </div>
-
-
-    @*<div class="container">
-            <!-- Modal -->
-            <div class="modal fade" id="myModal" role="dialog">
-                <div class="modal-dialog">
-
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header" style="padding:35px 50px;">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4><span class=""></span> Project Yu Login</h4>
-                        </div>
-                        <div class="modal-body" style="padding:40px 50px;">
-                            <form role="form">
-                                <div class="form-group">
-                                    <label for="usrname"><span class="glyphicon glyphicon-user"></span> Username</label>
-                                    Html.TextBoxFor(x => x.UserModel.UserName)
-                                </div>
-                                <div class="form-group">
-                                    <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
-                                    Html.PasswordFor(x => x.UserModel.PassWord)
-
-                                </div>
-                                <div class="checkbox">
-                                    <label><input type="checkbox" value="" checked>Remember me</label>
-                                </div>
-                                <button type="submit" class="btn-block" value="Login"><span class="glyphicon glyphicon-off"></span> Login</button>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-                            <p>Not a member? <a href="#">Sign Up</a></p>
-                            <p>Forgot <a href="#">Password?</a></p>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>*@
-
 </body>
 </html>
 

@@ -54,7 +54,7 @@ namespace ProjectYu
             //app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-        
+
             app.UseSession();
 
             app.UseMvc(routes =>
@@ -62,6 +62,13 @@ namespace ProjectYu
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+            });
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                name: "default2",
+                template: "{controller=Home}/{action=IndexWithModel}/{model?}");
             });
         }
     }

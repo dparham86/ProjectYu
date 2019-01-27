@@ -1,4 +1,4 @@
-﻿@model ProjectYu.Models.NewVideosModel
+﻿@model ProjectYu.Models.LoginedUserModel
 @*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
@@ -12,9 +12,9 @@
         @{ 
             int i = 0;
        
-        @foreach (var video in Model.listofVideos)
+        @foreach (var video in Model.NewVideosModel.listofVideos)
         {
-            int cellBreaker = Model.listofVideos.Count;
+            int cellBreaker = Model.NewVideosModel.listofVideos.Count;
 
             if (i % 4 == 0)
             {
@@ -29,9 +29,59 @@
     </video>
 </th>
 <td>
+    @using (Html.BeginForm("Index", "VideoPlayer"))
+    {
+        @Html.HiddenFor(x => x.loggedIn)
+        @Html.HiddenFor(x => x.UserModel.Birthday)
+        @Html.HiddenFor(x => x.UserModel.BlockedUserListID)
+        @Html.HiddenFor(x => x.UserModel.ChannelID)
+        @Html.HiddenFor(x => x.UserModel.Email)
+        @Html.HiddenFor(x => x.UserModel.FavoriteListID)
+        @Html.HiddenFor(x => x.UserModel.HistoryListID)
+        @Html.HiddenFor(x => x.UserModel.IsActive)
+        @Html.HiddenFor(x => x.UserModel.LikedVideoListID)
+        @Html.HiddenFor(x => x.UserModel.listOfFavorites)
+        @Html.HiddenFor(x => x.UserModel.listOfFavorites.FavoritesListID)
+        @Html.HiddenFor(x => x.UserModel.PassWord)
+        @Html.HiddenFor(x => x.UserModel.SubscriberListID)
+        @Html.HiddenFor(x => x.UserModel.UserId)
+        @Html.HiddenFor(x => x.UserModel.UserName)
+        @Html.HiddenFor(x => x.UserModel.WatchLaterListID)
 
-    <a asp-controller="VideoPlayer" asp-action="Index" asp-route-fileName="@video.FileName">@video.FileName</a>
-</td>
+        for (int j = 0; j < Model.NewVideosModel.listofVideos.Count; j++)
+        {
+            @Html.HiddenFor(x => x.NewVideosModel.listofVideos[j].CommentListID)
+            @Html.HiddenFor(x => x.NewVideosModel.listofVideos[j].CreatedbyUserID)
+            @Html.HiddenFor(x => x.NewVideosModel.listofVideos[j].CreatedDateTime)
+            @Html.HiddenFor(x => x.NewVideosModel.listofVideos[j].DeletedByUserID)
+            @Html.HiddenFor(x => x.NewVideosModel.listofVideos[j].DeletedDateTime)
+            @Html.HiddenFor(x => x.NewVideosModel.listofVideos[j].DislikesCount)
+            @Html.HiddenFor(x => x.NewVideosModel.listofVideos[j].FileName)
+            @Html.HiddenFor(x => x.NewVideosModel.listofVideos[j].LikesCount)
+            @Html.HiddenFor(x => x.NewVideosModel.listofVideos[j].Rating)
+            @Html.HiddenFor(x => x.NewVideosModel.listofVideos[j].VideoID)
+            @Html.HiddenFor(x => x.NewVideosModel.listofVideos[j].VideoName)
+        }
+
+        for (int j = 0; j < Model.UserModel.listOfFavorites.listOfMVideoModels.Count; j++)
+        {
+            @Html.HiddenFor(x => x.UserModel.listOfFavorites.listOfMVideoModels[j].CommentListID)
+            @Html.HiddenFor(x => x.UserModel.listOfFavorites.listOfMVideoModels[j].CreatedbyUserID)
+            @Html.HiddenFor(x => x.UserModel.listOfFavorites.listOfMVideoModels[j].CreatedDateTime)
+            @Html.HiddenFor(x => x.UserModel.listOfFavorites.listOfMVideoModels[j].DeletedByUserID)
+            @Html.HiddenFor(x => x.UserModel.listOfFavorites.listOfMVideoModels[j].DeletedDateTime)
+            @Html.HiddenFor(x => x.UserModel.listOfFavorites.listOfMVideoModels[j].DislikesCount)
+            @Html.HiddenFor(x => x.UserModel.listOfFavorites.listOfMVideoModels[j].FileName)
+            @Html.HiddenFor(x => x.UserModel.listOfFavorites.listOfMVideoModels[j].LikesCount)
+            @Html.HiddenFor(x => x.UserModel.listOfFavorites.listOfMVideoModels[j].Rating)
+            @Html.HiddenFor(x => x.UserModel.listOfFavorites.listOfMVideoModels[j].VideoID)
+        }
+
+        @Html.Hidden("linkId", i)
+    <button id="submitButton" value="click">@Model.NewVideosModel.listofVideos[i].FileName</button>
+    }
+        @*<a asp-controller="VideoPlayer" id="@i" asp-action="Index" asp-route-loginUserModel="@Model" asp-route-id="@i">@Model.NewVideosModel.listofVideos[i].FileName</a>*@
+    </td>
 
 if ((i % cellBreaker) == (cellBreaker - 1))
 {

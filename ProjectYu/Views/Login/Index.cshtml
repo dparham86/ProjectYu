@@ -1,7 +1,7 @@
 ﻿@model ProjectYu.Models.LoginedUserModel
 
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = null;
 }
 <!doctype html>
 
@@ -21,16 +21,13 @@
     <script>
         $("#loginButton").click(function () {
 
-
+            var LoginedUserModel = new Object();
+            
             $.ajax({
-                url: "/Login/Login",
+                url: "/Login/Index",
                 type: "POST",
-                data: function () {
-                    var data = new FormData();
-                    data.append("userName", $('#username').val());
-
-                    return data;
-                }(),
+                data: { LoginedUserModel: LoginedUserModel },
+                
                 success: function (response) {
                     // window.location.href = '/Home/Login?userName=' $("#username").val();
                 },
@@ -64,7 +61,8 @@
             <p><a href="#">Forgot your password?</a></p>
 
             @*<input type="password" id="passWord" name="password">*@
-            @Html.TextBoxFor(x => x.UserModel.PassWord)
+            @Html.PasswordFor(x => x.UserModel.PassWord)
+                        
             <div id="lower">
 
                 <input type="checkbox"><label class="check" for="checkbox">Keep me logged in</label>

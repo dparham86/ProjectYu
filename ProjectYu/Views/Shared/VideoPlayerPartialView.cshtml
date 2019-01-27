@@ -1,0 +1,21 @@
+﻿@model ProjectYu.Models.VideoModel
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+
+<body>
+    <div align="center" style="border-top-style:groove">
+        <div><h2>@Model.VideoName</h2></div>
+        <video controls="controls" style="width:80%;">
+            <source src="~/Content/Videos/@Model.FileName" type="video/mp4" />
+        </video>
+        <h3>Created By - Elsy</h3>
+        <button id="subscribeButton" value="Subcribe" style="width:100px; height:40px;">Subscribe</button><br />
+        <label>Likes - @Model.LikesCount</label><br />
+        <label>Dislikes - @Model.DislikesCount</label><br />
+        <textarea>Insert Comments here</textarea>
+    </div>
+
+</body>
+</html>

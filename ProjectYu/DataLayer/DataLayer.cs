@@ -297,7 +297,7 @@ namespace ProjectYu
                 using (var command = new SqlCommand("INSERT INTO Video(VideoName, CreatedByUserID, CreatedDateTime, Likes, Dislikes, Rating, CommentsListID, FileName) VALUES (@VideoName, @CreatedByUserId, @CreatedDateTime, 0, 0, 0, 0, @FileName)", cnn))
 
                 {
-                    command.Parameters.AddWithValue("@FileName", fileName + fileExt);
+                    command.Parameters.AddWithValue("@FileName", fileName);
                     command.Parameters.AddWithValue("@VideoName", fileName);
                     command.Parameters.AddWithValue("@CreatedByUserId", userId);
                     command.Parameters.AddWithValue("@CreatedDateTime", DateTime.Now);

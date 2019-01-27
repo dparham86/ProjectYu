@@ -10,11 +10,13 @@ namespace ProjectYu.Controllers
 {
     public class VideoPlayerController : Controller
     {
-        public IActionResult Index(string fileName)
+        public IActionResult Index(string linkId, LoginedUserModel loginUserModel)
         {
             VideoModel videoModel = new VideoModel();
             DataLayer dl = new DataLayer();
-            DataTable dt = dl.GetVideoByFileName(fileName);
+            List<VideoModel> videoModel2 = new List<VideoModel>();
+            loginUserModel.UserModel.listOfFavorites.listOfMVideoModels = videoModel2;
+            DataTable dt = dl.GetVideoByFileName(loginUserModel.NewVideosModel.listofVideos[int.Parse(linkId)].FileName);
             for (int i = 0; i < dt.Rows.Count; i++)
             {
 
@@ -24,10 +26,18 @@ namespace ProjectYu.Controllers
                 videoModel.VideoName = dt.Rows[i]["VideoName"].ToString();
                 videoModel.DislikesCount = int.Parse(dt.Rows[i]["Dislikes"].ToString());
                 videoModel.DeletedByUserID = int.Parse(dt.Rows[i]["CreatedByUserID"].ToString());
-
+                videoModel.isSelected = true;
 
             }
-            return View(videoModel);
+            for(int i = 0; i < loginUserModel.NewVideosModel.listofVideos.Count; i++)
+            {
+                if (i == int.Parse(linkId))
+                {
+                    loginUserModel.NewVideosModel.listofVideos[i] = videoModel;
+                    break;
+                }
+            }
+            return View(loginUserModel);
         } 
        
     } 
